@@ -1,23 +1,12 @@
 #![allow(unused_variables)]
 
+mod lib;
+
 fn main() {
-    let width = 4;
-    let height = 7;
-    let depth = 10;
+    let coords: (f32, f32) = (6.3, 15.0);
+    let coords_array: [f32; 2] = [6.3, 15.0];
+    let series = [1, 1, 2, 3, 5, 8, 13];
+    let mess = ([3, 2], 3.14, [(false, -3), (true, -100)], 5, "candy");
 
-    {
-        let area = area_of(width, height);
-    }
-
-    println!("Area is {}", area_of(width, height));
-    println!("Volume is {}", volume(width, height, depth));
-}
-
-fn volume(x: i32, y: i32, z: i32) -> i32 {
-    x * y * z
-}
-
-
-fn area_of(x: i32, y: i32) -> i32 {
-    return x*y;
+    lib::on_off(mess.2[1].0);
 }
