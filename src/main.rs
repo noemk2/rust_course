@@ -8,5 +8,6 @@ fn main() {
     let series = [1, 1, 2, 3, 5, 8, 13];
     let mess = ([3, 2], 3.14, [(false, -3), (true, -100)], 5, "candy");
 
-    lib::on_off(mess.2[1].0);
+    // lib::on_off(mess.2[1].0);
+    lib::print_distance(coords);
 }
