@@ -1,13 +1,23 @@
 #![allow(unused_variables)]
+// use std::env as enva;
 
 mod lib;
 
-fn main() {
-    let coords: (f32, f32) = (6.3, 15.0);
-    let coords_array: [f32; 2] = [6.3, 15.0];
-    let series = [1, 1, 2, 3, 5, 8, 13];
-    let mess = ([3, 2], 3.14, [(false, -3), (true, -100)], 5, "candy");
+// TITLE: comand-line arguments
 
-    // lib::on_off(mess.2[1].0);
-    lib::print_distance(coords);
+fn main() {
+    let args: Vec<String> = std::env::args().skip(1).collect();
+
+    for arg in args {
+        //if arg == "sum"
+        if arg == "sum" {
+            return lib::sum();
+        }
+
+        if arg == "double" {
+            return lib::double();
+        }
+
+        return lib::count(arg);
+    }
 }
