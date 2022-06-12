@@ -1,13 +1,23 @@
-const _STARTING_MISSILES: i32 = 8;
-const _READY_AMOUNT: i32 = 5;
+#![allow(unused_variables)]
+
 fn main() {
-    let mut missiles = _STARTING_MISSILES;
-    let ready = _READY_AMOUNT;
+    let width = 4;
+    let height = 7;
+    let depth = 10;
 
-    missiles = missiles - ready;
+    {
+        let area = area_of(width, height);
+    }
 
-    println!("Firing {} of my {} missiles...", ready, missiles);
-    println!("{} missiles left", missiles);
+    println!("Area is {}", area_of(width, height));
+    println!("Volume is {}", volume(width, height, depth));
 }
 
-// parte 2
+fn volume(x: i32, y: i32, z: i32) -> i32 {
+    x * y * z
+}
+
+
+fn area_of(x: i32, y: i32) -> i32 {
+    return x*y;
+}
