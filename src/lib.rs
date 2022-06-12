@@ -52,6 +52,22 @@ pub fn count<T: ToString>(x: T) {
     println!("count {} function ", s);
 }
 
+pub fn control_flow_string() {
+    let args: Vec<String> = std::env::args().skip(1).collect();
+
+    for arg in args {
+        //if arg == "sum"
+        if arg == "sum" {
+            return sum();
+        }
+
+        if arg == "double" {
+            return double();
+        }
+        return count(arg);
+    }
+}
+
 //   print_difference(coords);
 //   print_array(coords_array);
 // arg series 13
