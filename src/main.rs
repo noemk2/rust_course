@@ -1,17 +1,12 @@
+// TITLE: sctructs_traits   
 #![allow(unused_variables)]
-
-
-mod lib;
-
-// TITLE: ownership_references
+use variables::{Grapes, bunny_nibbles};
 
 fn main() {
-    let mut arg: String = std::env::args().nth(1).unwrap_or_else(|| {
-        println!("Please supply an argument to this program.");
-        std::process::exit(-1);
-    });
-    // println!("{}", arg);
-    // lib::inspect(&arg);
-    // lib::change(&mut arg);
-    lib::eat(&arg);
+    let mut grapes = Grapes { amount_left: 100 };
+    // grapes.bite();
+    // println!("Eat a grape: {:?}", grapes);
+    bunny_nibbles( &mut grapes );
+    println!("Bunny nibbles for awhile: {:?}", grapes);
 }
+

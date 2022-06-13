@@ -1,5 +1,8 @@
 #![allow(dead_code)]
 
+// use {variables}
+
+// mod main;
 use std::string::ToString;
 
 pub fn print_difference(x: f32, y: f32) {
@@ -106,3 +109,27 @@ pub fn add(arg_a: &i32, arg_b: &i32) -> i32 {
 //   print_array(coords_array);
 // arg series 13
 // ding(series[6]);
+
+// let mut arg: String = std::env::args().nth(1).unwrap_or_else(|| {
+//         println!("Please supply an argument to this program.");
+//         std::process::exit(-1);
+//     });
+
+#[derive(Debug)]
+pub struct Grapes {
+    pub amount_left: i32,
+}
+
+pub trait Bite {
+    fn bite(self: &mut Self);
+}
+
+impl Bite for Grapes {
+    fn bite(self: &mut Self) {
+        self.amount_left -= 1;
+    }
+}
+
+pub fn bunny_nibbles<T: Bite>(grapes: &mut T) {
+    grapes.bite();
+}
