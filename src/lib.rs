@@ -68,6 +68,40 @@ pub fn control_flow_string() {
     }
 }
 
+pub fn inspect(arg: &String) {
+    // if arg is plural
+    if arg.ends_with("s") {
+        println!("{} is plural", arg);
+    } else {
+        println!("{} is not plural", arg);
+    }
+}
+
+pub fn change(arg: &mut String) {
+    if !arg.ends_with("s") {
+        arg.push_str("s");
+        return println!("add s ...  {}", arg);
+    }
+    return println!("ya tiene s la palabra '{}'", arg);
+}
+
+pub fn eat(consumes: &String) -> bool {
+    if consumes.starts_with("b") && consumes.contains("a") {
+        println!("Might be a bananas");
+        return true;
+    }
+    println!("Not a bananas");
+    return false;
+}
+
+// dereferences a reference
+pub fn add(arg_a: &i32, arg_b: &i32) -> i32 {
+    let _a = *arg_a;
+    let _b = *arg_b;
+
+    return _a + _b;
+}
+
 //   print_difference(coords);
 //   print_array(coords_array);
 // arg series 13
