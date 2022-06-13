@@ -120,9 +120,11 @@ pub struct Grapes {
     pub amount_left: i32,
 }
 
+
 pub trait Bite {
     fn bite(self: &mut Self);
 }
+
 
 impl Bite for Grapes {
     fn bite(self: &mut Self) {
