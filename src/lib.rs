@@ -120,11 +120,9 @@ pub struct Grapes {
     pub amount_left: i32,
 }
 
-
 pub trait Bite {
     fn bite(self: &mut Self);
 }
-
 
 impl Bite for Grapes {
     fn bite(self: &mut Self) {
@@ -134,4 +132,79 @@ impl Bite for Grapes {
 
 pub fn bunny_nibbles<T: Bite>(grapes: &mut T) {
     grapes.bite();
+}
+
+// let mut grapes = Grapes { amount_left: 100 };
+// grapes.bite();
+// println!("Eat a grape: {:?}", grapes);
+// bunny_nibbles( &mut grapes );
+// println!("Bunny nibbles for awhile: {:?}", grapes);
+
+// collections_enums
+pub enum Shot<'a> {
+    Bullseye,
+    Hit(&'a f64),
+    Miss,
+}
+
+impl Shot<'_> {
+    pub fn points(&self) -> i32 {
+        match self {
+            Shot::Bullseye => 5,
+            Shot::Hit(x) => if_x(x),
+            Shot::Miss => 1,
+        }
+    }
+}
+
+fn if_x(x: &f64) -> i32 {
+    if *x < 3.0 {
+        return 2;
+    }
+    if *x >= 3.0 {
+        return 1;
+    }
+    return x.to_string().parse::<i32>().unwrap();
+}
+
+#[derive(Debug)]
+pub struct Coord {
+   pub x: f64,
+   pub y: f64,
+}
+
+impl Coord {
+    pub fn distance_from_center(&self) -> f64 {
+        (self.x.powf(2.0) + self.y.powf(2.0)).sqrt()
+    }
+    
+
+    pub fn print_description(&self) {
+        println!(
+            "Coordinates is {:.1} away, at ({:.1}, {:.1})",
+            self.distance_from_center(),
+            self.x,
+            self.y
+        );
+    }
+}
+
+pub fn get_arrow_coords(arrow_num: i32) -> Vec<Coord> {
+    let mut coords: Vec<Coord> = Vec::new();
+    for _ in 0..arrow_num{
+        let coord = Coord {
+            x: (rand::random::<f64>() - 0.5) * 12.0,
+            y: (rand::random::<f64>() - 0.5) * 12.0,
+        };
+        coords.push(coord);
+    }
+    coords
+}
+
+pub fn sum_shots(shots: &Vec<i32>){
+    let mut sum = 0;
+    for shot in shots {
+        sum += shot;
+    }
+    println!("Final point total is {}", sum);
 }
