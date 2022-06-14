@@ -4,7 +4,7 @@
 // use log::{info, trace, warn};
 
 // use variables::{Grapes, bunny_nibbles, Bite};
-use variables::Shot;
+// use variables::Shot;
 use variables::{get_arrow_coords, sum_shots, Coord, iterate_over_vector};
 
 
