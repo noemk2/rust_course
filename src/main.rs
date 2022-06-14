@@ -5,15 +5,42 @@
 
 // use variables::{Grapes, bunny_nibbles, Bite};
 // use variables::Shot;
-use variables::{get_arrow_coords, sum_shots, Coord, iterate_over_vector};
+// use variables::{get_arrow_coords, sum_shots, Coord, iterate_over_vector};
 
+// use std::thread;
+
+// closures_threads
+// use crossbeam::channel;
+// use variables::{expensive_sum, pause_ms};
+
+// use std::sync::mpsc ;
+use std::sync::mpsc::channel;
+use std::thread;
+use variables::pause_ms;
 
 fn main() {
-    let arrwow_crowds: Vec<Coord> = get_arrow_coords(5);
-    let mut shots: Vec<i32> = Vec::new();
+    let (tx, rx) = channel();
 
-    iterate_over_vector( &mut shots, &arrwow_crowds);
+    let tx2 = tx.clone();
 
-    println!("{:?}", &shots);
-    println!("{:?}", sum_shots(&shots));
+    let handle_a = thread::spawn(move || {
+        pause_ms(5000);
+        tx.send("Hello from thread A".to_string()).unwrap();
+    });
+
+    let handle_b = thread::spawn(move || {
+        tx2.send("Hello from thread B".to_string()).unwrap();
+    });
+
+    for msg in rx {
+        println!("Main thread: Received {}", msg);
+    }
+
+    handle_a.join().unwrap();
+    handle_b.join().unwrap();
 }
+
+/*
+std::sync::mpsc module
+este modulo tambien sirve para enviar y recibir mensajes entre procesos
+*/

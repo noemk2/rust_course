@@ -1,5 +1,9 @@
 #![allow(dead_code)]
 
+
+use std::thread;
+use std::time::Duration;
+
 // use {variables}
 
 // mod main;
@@ -50,6 +54,7 @@ pub fn double() {
     println!("double function")
 }
 
+// Generic function
 pub fn count<T: ToString>(x: T) {
     let s: String = x.to_string();
     println!("count {} function ", s);
@@ -221,3 +226,83 @@ pub fn iterate_over_vector(shots: &mut Vec<i32>, arrwow_crowds: &Vec<Coord>) {
         }
     }
 }
+
+    // let arrwow_crowds: Vec<Coord> = get_arrow_coords(5);
+    // let mut shots: Vec<i32> = Vec::new();
+
+    // iterate_over_vector( &mut shots, &arrwow_crowds);
+
+    // println!("{:?}", &shots);
+    // println!("{:?}", sum_shots(&shots));
+
+// closures_threads
+pub fn pause_ms(ms: u64) {
+    thread::sleep(Duration::from_millis(ms));
+}
+
+
+pub fn expensive_sum(v: Vec<i32>) -> i32 {
+    // pause_ms(500);
+    // sleep_ms(500); // deprecated
+    // thread::sleep_ms(500); // deprecated
+
+    // sleep(Duration::from_millis(5000));
+    pause_ms(500);
+
+    println!("Child thread: just about finished");
+
+    return v
+        .iter()
+        .filter(|&x| x % 2 == 0)
+        .map(|&x| x * x)
+        .sum::<i32>();
+
+    // println!("Child thread: finished with {}", &par);
+    // return par;
+}
+
+
+    // let sum: String = handle.to_string();
+    // println!("The child thread's expensive sum is {}", sum);
+
+
+
+    // let my_vector = vec![2, 5, 1, 0, 4, 3];
+    // let handle = expensive_sum(my_vector);
+
+    // for letter in vec!["a", "b", "c", "d", "e", "f"] {
+    //     println!("Main thread: Letter {}", letter);
+    //     pause_ms(200);
+    // }
+
+// let (tx, rx) = channel::unbounded();
+//     // Cloning a channel makes another variable connected to that end of the channel so that you can
+//     // send it to another thread.
+//     let tx2 = tx.clone();
+
+//     let handle_a = thread::spawn(move || {
+//         pause_ms(0);
+//         tx2.send("Thread A: 1").unwrap();
+//         pause_ms(200);
+//         tx2.send("Thread A: 2").unwrap();
+//     });
+
+//     pause_ms(100); // Make sure Thread A has time to get going before we spawn Thread B
+//     let handle_b = thread::spawn(move || {
+//         pause_ms(0);
+//         tx.send("Thread B: 1").unwrap();
+//         pause_ms(200);
+//         tx.send("Thread B: 2").unwrap();
+//     });
+
+
+//     // Using a Receiver channel as an iterator is a convenient way to get values until the channel
+//     // gets closed.  A Receiver channel is automatically closed once all Sender channels have been
+//     // closed.  Both our threads automatically close their Sender channels when they exit and the
+//     // destructors for the channels get automatically called.
+//     for msg in rx {
+//         println!("Main thread: Received {}", msg);
+//     }
+//     // Join the child threads for good hygiene.
+//     handle_a.join().unwrap();
+//     handle_b.join().unwrap();
