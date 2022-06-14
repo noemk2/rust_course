@@ -202,5 +202,22 @@ pub fn get_arrow_coords(arrow_num: i32) -> Vec<Coord> {
 
 pub fn sum_shots(shots: &Vec<i32>) {
     //   shots.iter().sum::<i32>();
-      println!("{}", shots.iter().sum::<i32>());
+    println!("{}", shots.iter().sum::<i32>());
+}
+
+pub fn iterate_over_vector(shots: &mut Vec<i32>, arrwow_crowds: &Vec<Coord>) {
+    for coord in arrwow_crowds {
+        // let _ = coord.distance_from_center();
+        let one_coord: &f64 = &coord.distance_from_center();
+
+        if one_coord < &1.0 {
+            shots.push(*Shot::Bullseye.points());
+        }
+        if one_coord >= &1.0 && one_coord <= &5.0 {
+            shots.push(*Shot::Hit(one_coord).points());
+        }
+        if one_coord > &5.0 {
+            shots.push(*Shot::Miss.points());
+        }
+    }
 }
