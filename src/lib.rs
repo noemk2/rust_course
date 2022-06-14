@@ -148,23 +148,23 @@ pub enum Shot<'a> {
 }
 
 impl Shot<'_> {
-    pub fn points(&self) -> i32 {
+    pub fn points(&self) -> &i32 {
         match self {
-            Shot::Bullseye => 5,
+            Shot::Bullseye => &5,
             Shot::Hit(x) => if_x(x),
-            Shot::Miss => 1,
+            Shot::Miss => &1,
         }
     }
 }
 
-fn if_x(x: &f64) -> i32 {
-    if *x < 3.0 {
-        return 2;
+fn if_x(x: &f64) -> &i32 {
+    if x < &3.0 {
+        return &2;
     }
-    if *x >= 3.0 {
-        return 1;
+    if x >= &3.0 {
+        return &1;
     }
-    return x.to_string().parse::<i32>().unwrap();
+    return &1
 }
 
 #[derive(Debug)]

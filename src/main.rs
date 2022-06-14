@@ -17,16 +17,16 @@ fn main() {
     // iterarte over the vector
     for coord in &arrwow_crowds {
         // let _ = coord.distance_from_center();
-        let one_coord: &f64 =  &coord.distance_from_center();
+        let one_coord: &f64 = &coord.distance_from_center();
 
         if one_coord < &1.0 {
-            shots.push(Shot::Bullseye.points());
+            shots.push(*Shot::Bullseye.points());
         }
         if one_coord >= &1.0 && one_coord <= &5.0 {
-           shots.push(Shot::Hit(one_coord).points());
+           shots.push(*Shot::Hit(one_coord).points());
         }
         if one_coord > &5.0 {
-           shots.push(Shot::Miss.points());
+           shots.push(*Shot::Miss.points());
         }
 
     }
