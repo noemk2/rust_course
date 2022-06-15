@@ -136,17 +136,17 @@ pub fn generate_options(processing: &String, mut args: Vec<String>) {
             // **OPTION**
             // println!("{:?}", infile);
             // println!("{:?}", outfile);
-
             // Improve the blur implementation -- see the blur() function below
             blur(&infile, &outfile);
         }
-        // "fractal" => {
-        //     if args.len() != 1 {
-        //         print_usage_and_exit();
-        //     }
-        //     let outfile = args.remove(0);
-        //     fractal(outfile);
-        // }
+        
+        "fractal" => {
+            if args.len() != 1 {
+                print_usage_and_exit();
+            }
+            let outfile = args.remove(0);
+            fractal(outfile);
+        }
         _ => {
             print_usage_and_exit();
         }

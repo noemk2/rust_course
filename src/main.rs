@@ -3,6 +3,9 @@
 
 use variables::{blur, fractal, generate_options, print_usage_and_exit};
 
+//  cargo run --release blur image.png blurred.png blur.png
+//  cargo run --release blur image.png 
+
 fn main() {
     // use clap future
     let mut args: Vec<String> = std::env::args().skip(1).collect();
