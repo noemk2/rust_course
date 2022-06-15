@@ -1,29 +1,44 @@
-// TITLE: procesador de imagenes 
+// TITLE: procesador de imagenes
 #![allow(unused_variables, dead_code, unused_imports)]
 
+use variables::{blur, fractal, print_usage_and_exit};
 
 fn main() {
-// use clap future 
+    // use clap future
 
-let args: Vec<String> = std::env::args().skip(1).collect();
+    let mut args: Vec<String> = std::env::args().skip(1).collect();
 
-if args.is_empty() {
+    if args.is_empty() {
         print_usage_and_exit();
     }
 
-let subcommand = args.remove(0);
+    let subcommand = args.remove(0);
 
-println!("{}", subcommand);
+    // vefificar
+    println!("{}", subcommand);
 
-
-match subcommand.as_str() {
-    "convert" => {
-        let input_file = args.remove(0);
+    match subcommand.as_str() {
+        // EXAMPLE FOR CONVERSION OPERATIONS
+        "blur" => {
+            if args.len() != 2 {
+                print_usage_and_exit();
+            }
+            let infile = args.remove(0);
+            let outfile = args.remove(0);
+            // **OPTION**
+            // Improve the blur implementation -- see the blur() function below
+            blur(infile, outfile);
         }
-    }// match
 
-
-
-
-
-}//main
+        "fractal" => {
+            if args.len() != 1 {
+                print_usage_and_exit();
+            }
+            let outfile = args.remove(0);
+            fractal(outfile);
+        }
+        _ => {
+            print_usage_and_exit();
+        }
+    } // match
+} //main
