@@ -14,9 +14,12 @@ pub fn blur(infile: &String, outfile: &String) {
     // **OPTION**
     // Parse the blur amount (an f32) from the command-line and pass it through
     // to this function, instead of hard-coding it to 2.0.
-    let img2 = img.blur(2.0);
+    // let img2 = img.blur(2.0);
     // Here's how you save an image to a file.
-    img2.save(outfile).expect("Failed writing OUTFILE.");
+    let _ = &img
+        .blur(2.0)
+        .save(outfile)
+        .expect("Failed writing OUTFILE.");
 }
 
 pub fn fractal(outfile: &String) {
@@ -58,10 +61,13 @@ pub fn brighten(infile: &String, outfile: &String) {
     let img = image::open(infile).expect("Failed to open INFILE.");
     // .brighten() takes one argument, an i32.  Positive numbers brighten the
     // image. Negative numbers darken it.  It returns a new image.
-    let img2 = img.brighten(10);
+    // let img2 = img.brighten(10);
     // Challenge: parse the brightness amount from the command-line and pass it
     // through to this function.
-    img2.save(outfile).expect("Failed writing OUTFILE.");
+    let _ = &img
+        .brighten(10)
+        .save(outfile)
+        .expect("Failed writing OUTFILE.");
 }
 
 pub fn crop(infile: &String, outfile: &String) {
@@ -69,10 +75,14 @@ pub fn crop(infile: &String, outfile: &String) {
     let img = image::open(infile).expect("Failed to open INFILE.");
     // .crop() takes four arguments: x: u32, y: u32, width: u32, height: u32
     // You may hard-code them, if you like.  It returns a new image.
-    let img2 = img.clone().crop( 100, 100, 200, 200);
+    // let img2 = img.clone().crop( 100, 100, 200, 200);
     // Challenge: parse the four values from the command-line and pass them
     // through to this function.
-    img2.save(outfile).expect("Failed writing OUTFILE.");
+    let _ = &img
+        .clone()
+        .crop(100, 100, 200, 200)
+        .save(outfile)
+        .expect("Failed writing OUTFILE.");
     // See blur() for an example of how to save the image.
 }
 
@@ -84,11 +94,14 @@ pub fn rotate(infile: &String, outfile: &String) {
     //   .rotate180()
     //   .rotate270()
     // All three methods return a new image.  Pick one and use it!
-    let img2 = img.rotate90();
+    // let img2 = img.rotate90();
 
     // Challenge: parse the rotation amount from the command-line, pass it
     // through to this function to select which method to call.
-    img2.save(outfile).expect("Failed writing OUTFILE.");
+    let _ = &img
+        .rotate90()
+        .save(outfile)
+        .expect("Failed writing OUTFILE.");
     // See blur() for an example of how to save the image.
 }
 
@@ -97,19 +110,25 @@ pub fn invert(infile: &String, outfile: &String) {
     let mut img = image::open(infile).expect("Failed to open INFILE.");
     // .invert() takes no arguments and converts the image in-place, so you
     // will use the same image to save out to a different file.
-     img.invert();
+    img.invert();
 
-     img.save(outfile).expect("Failed writing OUTFILE.");
+    img.save(outfile).expect("Failed writing OUTFILE.");
 
     // See blur() for an example of how to save the image.
 }
 
 pub fn grayscale(infile: &String, outfile: &String) {
     // See blur() for an example of how to open an image.
-
+    // let img = image::open(infile).expect("Failed to open INFILE.");
     // .grayscale() takes no arguments. It returns a new image.
-
+    // let img2 = img.grayscale();
     // See blur() for an example of how to save the image.
+    // let _ = &img.grayscale().save(outfile).expect("Failed writing OUTFILE.");
+    image::open(infile)
+        .expect("Failed to open INFILE.")
+        .grayscale()
+        .save(outfile)
+        .expect("Failed writing OUTFILE.")
 }
 
 pub fn generate(outfile: &String) {
@@ -192,6 +211,17 @@ pub fn generate_options(processing: &String, mut args: Vec<String>) {
             // **OPTION**
             // Improve the invert implementation -- see the invert() function below
             invert(&infile, &outfile);
+        }
+
+        "grayscale" => {
+            if args.len() != 2 {
+                print_usage_and_exit();
+            }
+            let infile = args.remove(0);
+            let outfile = args.remove(0);
+            // **OPTION**
+            // Improve the grayscale implementation -- see the grayscale() function below
+            grayscale(&infile, &outfile);
         }
 
         _ => {
