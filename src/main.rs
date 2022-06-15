@@ -8,6 +8,8 @@ fn main() {
     let mut args: Vec<String> = std::env::args().skip(1).collect();
     // assert_eq!(args.is_empty(), vec![""].is_empty());
 
+    // cargo run --release blur image.png blurred.png
+    // println!("this is args: {:?}", args);
 
     // assert!(args.is_empty()); // wtf
     if args.is_empty() {
@@ -15,10 +17,11 @@ fn main() {
     }
 
     // fix : using two variables
-    let subcommand_string = args.remove(0);
+    // let processing= args.clone().remove(0);
+    let processing= args.remove(0);
 
     // vefificar
-    // println!("this is subcommand: {}", subcommand); // arg.1
+    // println!("this is process: {}", processing); // arg.1
+    generate_options(&processing, args);
 
-    generate_options(&subcommand_string, args.clone());
 } //main

@@ -8,7 +8,7 @@ pub fn print_usage_and_exit() {
     std::process::exit(-1);
 }
 
-pub fn blur(infile: String, outfile: String) {
+pub fn blur(infile: &String, outfile: &String) {
     // Here's how you open an existing image file
     let img = image::open(infile).expect("Failed to open INFILE.");
     // **OPTION**
@@ -122,9 +122,10 @@ pub fn generate(outfile: String) {
     // See blur() for an example of how to save the image
 }
 
-pub fn generate_options(subcommand: &String, mut args: Vec<String>) {
-
-    match subcommand.as_str() {
+pub fn generate_options(processing: &String, mut args: Vec<String>) {
+    // println!("{:?}", args); // arg[1]: [String]
+    // println!("{:?}", args.len());
+    match processing.as_str() {
         // EXAMPLE FOR CONVERSION OPERATIONS
         "blur" => {
             if args.len() != 2 {
@@ -133,17 +134,19 @@ pub fn generate_options(subcommand: &String, mut args: Vec<String>) {
             let infile = args.remove(0);
             let outfile = args.remove(0);
             // **OPTION**
-            // Improve the blur implementation -- see the blur() function below
-            blur(infile, outfile);
-        }
+            // println!("{:?}", infile);
+            // println!("{:?}", outfile);
 
-        "fractal" => {
-            if args.len() != 1 {
-                print_usage_and_exit();
-            }
-            let outfile = args.remove(0);
-            fractal(outfile);
+            // Improve the blur implementation -- see the blur() function below
+            blur(&infile, &outfile);
         }
+        // "fractal" => {
+        //     if args.len() != 1 {
+        //         print_usage_and_exit();
+        //     }
+        //     let outfile = args.remove(0);
+        //     fractal(outfile);
+        // }
         _ => {
             print_usage_and_exit();
         }
