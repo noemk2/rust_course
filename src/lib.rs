@@ -150,8 +150,8 @@ pub fn generate(outfile: &String) {
 
         // Use green as the fractal foreground (here is the fractal math part)
         // change 1.5  
-        let cx = y as f32 * scale_x - 3.5;
-        let cy = x as f32 * scale_y - 1.5;
+        let cx = y as f32 * scale_x - 1.5;
+        let cy = x as f32 * scale_y - 3.5;
 
         let c = num_complex::Complex::new(-0.4, 0.6);
         let mut z = num_complex::Complex::new(cx, cy);
