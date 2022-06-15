@@ -92,12 +92,14 @@ pub fn rotate(infile: &String, outfile: &String) {
     // See blur() for an example of how to save the image.
 }
 
-pub fn invert(infile: &String) {
+pub fn invert(infile: &String, outfile: &String) {
     // See blur() for an example of how to open an image.
     let mut img = image::open(infile).expect("Failed to open INFILE.");
     // .invert() takes no arguments and converts the image in-place, so you
     // will use the same image to save out to a different file.
-     img.clone().invert();
+     img.invert();
+
+     img.save(outfile).expect("Failed writing OUTFILE.");
 
     // See blur() for an example of how to save the image.
 }
@@ -182,14 +184,14 @@ pub fn generate_options(processing: &String, mut args: Vec<String>) {
             rotate(&infile, &outfile);
         }
         "invert" => {
-            if args.len() != 1 {
+            if args.len() != 2 {
                 print_usage_and_exit();
             }
             let infile = args.remove(0);
-            // let outfile = args.remove(0);
+            let outfile = args.remove(0);
             // **OPTION**
             // Improve the invert implementation -- see the invert() function below
-            invert(&infile);
+            invert(&infile, &outfile);
         }
 
         _ => {
